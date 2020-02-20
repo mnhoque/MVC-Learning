@@ -1,0 +1,50 @@
+﻿
+@using MVCWebSite.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DonationSummary</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            <h1>Donation Details</h1><br>
+            <br />
+            <!--Enter Amount: <input type="text" name="DonatorAmount"><br>-->
+            <!--This is a comment. Comments are not displayed in the browser-->
+            <br />
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Donator's Name</th>
+                        <th>Donation Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var donator in ViewBag.EmployeeList1)
+                    {
+                        <tr>
+                            <td>@donator.donatorName</td>
+                            <td>@donator.donatorAmount</td>
+                            <!--<td><a href="" id="employee.EmpID" class="btn btn-danger">Delete</a></td>-->
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <br />
+            <a href="/Home/DonateSum">Go to Donation</a>
+            <br />
+            @ViewBag.TotalDonatedAmount
+            @ViewBag.NumberOfDonators
+        </form>
+    </div>
+</body>
+</html>

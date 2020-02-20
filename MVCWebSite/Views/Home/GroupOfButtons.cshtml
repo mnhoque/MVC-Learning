@@ -1,0 +1,159 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GroupOfButtons</title>
+    <script>
+
+
+        var t1, elem;
+        var rates = document.getElementById('rates');
+        var rate_value = "Low Speed";
+        var valueOfRec2 = 0;
+        function myFunction() {
+            if (document.getElementById('r1').checked) {
+                rate_value = document.getElementById('r1').value;
+            }
+            else if (document.getElementById('r2').checked) {
+                rate_value = document.getElementById('r2').value;
+            }
+            else if (document.getElementById('r3').checked) {
+                rate_value = document.getElementById('r3').value;
+
+            }
+            //alert(rate_value + " is selected");
+        }
+
+        function start() {
+            // alert('starting...');
+            elem = document.getElementById("startButton");
+            if (elem.value == "Start") {
+                elem.value = "Stop";
+
+                t1 = setTimeout(moveRectNonStop, 1000);
+            }
+            else {
+                elem.value = "Start";
+                stop();
+
+            }
+
+        }
+
+        function stop() {
+            clearTimeout(t1);
+        }
+        function moveRectNonStop() {
+            var time = 1000;
+            var r = document.getElementById("rec");
+            var r2 = document.getElementById("rec2");
+
+
+            valueOfX = parseInt(r.getAttribute("x"));
+
+
+            console.log("value of x = " + valueOfX);
+
+            valueOfX = valueOfX + 2;
+
+
+            r.setAttribute("x", valueOfX);
+            r2.setAttribute("x", valueOfX - 800);
+
+
+
+            if (rate_value == "Low Speed") {
+                time = 1000;
+            } else if (rate_value == "Medium Speed") {
+                time = 200;
+            } else {
+                time = 20;
+            }
+
+            t1 = setTimeout(moveRectNonStop, time);
+
+        }
+
+        function logOut() {
+
+        }
+
+        function reset() {
+            //stop the timer
+            stop();
+
+            //rest the value of the rectangle to initial value
+            var r = document.getElementById("rec");
+            r.setAttribute("x", -150);
+
+            //set the value of element to start
+            elem = document.getElementById("startButton");
+            elem.value = "Start";
+
+        }
+
+        function createReact() {
+
+            debugger;
+            //var svg = document.documentElement;
+            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            var svgNS = svg.namespaceURI;
+
+            var rect = document.createElementNS(svgNS, 'rect');
+            rect.setAttribute('x', 5);
+            rect.setAttribute('y', 5);
+            rect.setAttribute('width', 150);
+            rect.setAttribute('height', 150);
+            rect.setAttribute('fill', 'blue');
+            svg.appendChild(rect);
+            document.body.appendChild(svg);
+
+            var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', '60');
+            text.setAttribute('y', '75');
+            text.setAttribute('fill', 'red');
+            text.textContent = 'Emon';
+
+            svg.appendChild(rect);
+            svg.appendChild(text); 
+
+
+            
+        }
+    </script>
+</head>
+<body>
+    Welcome @Session["UserId"]
+    <a href="/Home/LogOut">Log Out</a>
+    
+    <div >
+
+        <input type="button" id="startButton" value="Start" onclick="start()" />
+        <input type="button" id="stopButton" value="Reset" onclick="reset()" />
+        <svg width="800" height="300">
+            <rect id="rec" x="-150" y="20" width="150" height="150"
+                  style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" onclick="start()" />
+            <rect id="rec2" x="-950" y="20" width="150" height="150"
+                  style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" onclick="start()" />
+        </svg>
+
+        <br />
+        <svg width="800" height="300" name="mySVG" xmlns="http://www.w3.org/2000/svg" />
+
+    </div>
+    <div id="rates">
+        <input type="radio" id="r1" name="rate" value="Low Speed" checked="checked" onchange="myFunction()" /> Low Speed
+        <input type="radio" id="r2" name="rate" value="Medium Speed" onchange="myFunction()" /> Medium Speed
+        <input type="radio" id="r3" name="rate" value="High Speed" onchange="myFunction()" /> High Speed
+    </div>
+
+    <input type="button" value="create" onclick="createReact()" />
+
+</body>
+</html>

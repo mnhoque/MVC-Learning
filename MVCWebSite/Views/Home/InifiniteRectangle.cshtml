@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InifiniteRectangle</title>
+</head>
+<body>
+    <div>
+
+        <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+
+        <script>
+            function drawRect1() {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "black";
+                ctx.rect(20, 20, 150, 100);
+                ctx.stroke();
+            }
+
+            function drawRect2() {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "black";
+                ctx.rect(40, 20, 150, 100);
+                ctx.stroke();
+            }
+
+            function clearPanel() {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "white";
+                ctx.rect(20, 20, 150, 100);
+                ctx.stroke();
+
+            }
+        </script>
+
+
+        <script>
+            function start() {
+                setTimeout(drawRect, 100);
+            }
+            var lastX = -1;
+            var x = 0;
+            function drawRect() {
+
+                if (lastX != -1) {
+                    clearPrevRect(lastX);
+                }
+
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "black";
+                ctx.rect(x, 20, 150, 100);
+                ctx.stroke();
+                lastX = x;
+                x = x + 5;
+                if (x <= 305)
+                    setTimeout(drawRect, 100);
+
+            }
+
+            function clearPrevRect(x) {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "white";
+                ctx.rect(x, 20, 150, 100);
+                ctx.stroke();
+
+            }
+        </script>
+    </div>
+
+    <input type="button" onclick="drawRect1()" value="Draw Rect 1" />
+    <input type="button" onclick="clearPanel()" value="Clear Panel" />
+
+    <input type="button" onclick="drawRect2()" value="Draw Rect 2" />
+
+
+    <input type="button" onclick="start()" value="Start Animation" />
+
+
+</body>
+</html>

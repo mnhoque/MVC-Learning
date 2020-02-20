@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Operation</title>
+</head>
+<body>
+    <div>
+        @(ViewBag.Id)
+        @for (int i = 1; i <= ViewBag.Mul; i++)
+        {
+            int result = i * ViewBag.Id;
+            <font>@ViewBag.id*@i=@result</font>
+
+            <br/>
+        }    
+        </div>
+</body>
+</html>
+

@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LogIn</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // alert('page already loaded')
+
+            $('#btnLogin').click(function () {
+                // alert('hiiiii.');
+                document.getElementById('mySpan').innerHTML = "";
+                $('#loading').show();
+
+                document.getElementById("btnLogin").disabled = true;
+
+                $.post("/Home/ValidateLogin",
+                    {
+                        Userid: $('#tbUserid').val(),
+                        Password: $('#tbPassword').val()
+                    },
+
+                    //receiver
+                    function (data, status) {
+                       // alert('returned from server');
+                        $('#loading').hide();
+                        document.getElementById("btnLogin").disabled = false;
+
+                        if (data.Status == "Success") {
+                            document.getElementById('mySpan').innerHTML = "Login success for " + data.UserName + "(<font color='red'>" + data.FullName + "</font>)";
+
+                            setTimeout(
+                                function () {
+                                    //alert('Redirecting......');
+                                    window.location = "/Home/GroupOfButtons";
+                                },
+                                1000
+                            );
+                        }
+                        else {
+                            document.getElementById('mySpan').innerHTML = "Login failed!<br/>" + data.ErrorMessage;
+                        }
+
+                    }).fail(function (info) {
+                        // error handling
+                        $('#loading').hide();
+                        document.getElementById("btnLogin").disabled = false;
+
+                        alert("Sorry, we have a network failure");
+                    });
+
+
+
+            });//button click end
+                
+
+
+
+        });
+
+
+
+    </script>
+
+</head>
+<body>
+    <div>
+        
+            Enter user name: <input id="tbUserid" type="text" />
+            <br />
+            Enter Password: <input id="tbPassword" type="password" />
+            <br />
+            <input id="btnLogin" type="button" value="submit" />
+            <br />
+            <span id="mySpan">
+            </span>
+
+            <span id="loading" style="display:none">
+                <img src="~/imagesWeb/loading.gif" height="25" />
+            </span>
+        
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@using MVCWebSite.Controllers;
+
+@{
+    Layout = null;
+    List<AlphabetFrequency> list = null;
+    if (ViewBag.X != null)
+    {
+        list = ViewBag.X;
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CountEachLetter</title>
+    
+</head>
+<body>
+    <form method="post">
+        <div>
+            <textarea name="paragraph" rows="4" cols="50">
+
+        </textarea><br />
+            <input type="submit" name="btnCount" value="Count Letter"  />
+        </div>
+        <br />
+        <span id="my span">
+            @if (list != null)
+            {
+                
+                for (int i = 0; i <= list.Count - 1; i++)
+                {
+                    
+                    <font color="red" size="4">
+                        @list[i].alphabet   is the @list[i].frequency is percentage of total @list[i].percent.ToString("0.00") %<br />
+
+                    </font>
+                }
+            }
+            
+        </span>
+
+    </form>
+
+</body>
+</html>

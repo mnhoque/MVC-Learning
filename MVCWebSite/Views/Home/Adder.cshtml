@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Adder</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            The Number: <input type="text" name="Number"><br>
+            <input name="btnAdd" type="submit" value="Add the numbers" />
+            <input name="btnGet" type="submit" value="Get the sum" />
+            <br />
+            @ViewBag.TotalSum
+            
+        </form>
+    </div>
+</body>
+</html>

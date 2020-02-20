@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "ShowEmployeesAccordingOffice";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Operation</title>
+</head>
+<body>
+    <div>
+
+        @for (int i = 0; i <= ViewBag.EmpNames.Count - 1; i++)
+        {
+            //int result = i * ViewBag.Id;
+            //<a href="~/First/ShowEmployee/@ViewBag.DeptOfEmployee[i].ToString()"></a>
+
+            <font color="red" size="4">@ViewBag.EmpNames[i], age is @ViewBag.AgeOfEmployees[i], dept is @ViewBag.DeptOfEmployees[i], works in the office of </font>
+            var urlHost = ViewBag.OfficeNameOfEmployees[i];
+
+            var xUrlHost = urlHost.Split('.');
+            foreach (var thing in xUrlHost)
+            {
+                if (thing != "www" && thing != "com")
+                {
+                    urlHost = thing;
+                    if (urlHost.Length > 1)
+                    {
+                        urlHost = char.ToUpper(urlHost[0]) + urlHost.Substring(1);
+                    }
+
+                }
+            }
+            <a HREF="@ViewBag.OfficeNameOfEmployees[i]">@urlHost</a>
+            <a HREF="@ViewBag.OfficeNameOfEmployees[i]" target="_blank">Open @urlHost in new tab</a>
+
+            <a href=" ~/First/ShowEmployeesAccordingOffice?website=@ViewBag.OfficeNameOfEmployees[i]">@urlHost</a>
+            <br />
+
+        }
+        @ViewBag.Id;
+        @for (int i = 0; i <= ViewBag.OfficeNameOfEmployees.Count - 1; i++)
+        {
+            string empName = "";
+            if (ViewBag.OfficeNameOfEmployees[i] == ViewBag.Id)
+            {
+                empName = ViewBag.EmpNames[i];
+            }
+            <font color="red" size="4">@empName</font>
+        }
+
+    </div>
+</body>
+
+</html>
+
+

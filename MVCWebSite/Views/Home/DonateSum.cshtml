@@ -1,0 +1,38 @@
+﻿@model MVCWebSite.Models.Donator
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DonateSum</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            Donation Limit: @ViewBag.totalDonation
+            <br/>
+            Enter Name: <input type="text" name="DonatorName"><br>
+            <br />
+            Enter Amount: <input type="text" name="DonatorAmount" value=""><br>
+            <br />
+            Remaining Amount Of Donation: <input type="text" name="RequiredAmount" value="@ViewBag.RequiredAmount"><br>
+            <br />
+            <input name="btnDonate" type="submit" value="Donate" />
+            <input name="btnDetails" type="submit" value="Details" />
+            <br />
+            @ViewBag.RequiredAmount
+            The amount of donation untill now :@ViewBag.DonationSum
+
+        </form>
+        <progress value="@ViewBag.DonationSum" max="2500">
+        </progress>
+        <br />
+        <a href="/Home/DonationSummary">Donation Summary</a>
+    </div>
+</body>
+</html>

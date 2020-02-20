@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DisplayCircle</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            Enter Center Co-ordinate: <input type="text" name="Coordinate"><br>
+            <br />
+            Enter Radius: <input type="text" name="Radius"><br>
+            <br />
+            <input name="btnDraw" type="submit" value="Draw" />
+            @ViewBag.X
+            <br />
+            @ViewBag.Y
+            <br />
+            @ViewBag.Radius
+            <br/>
+            <svg width="100" height="100">
+                <circle cx="@ViewBag.X" cy="@ViewBag.Y" r="@ViewBag.Radius" stroke="green" stroke-width="4" fill="yellow" />
+                Sorry, your browser does not support inline SVG.
+            </svg>
+        </form>
+
+    </div>
+</body>
+</html>

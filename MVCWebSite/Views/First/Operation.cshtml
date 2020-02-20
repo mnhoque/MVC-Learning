@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Operation</title>
+</head>
+<body>
+    <div>
+        @if (ViewBag.task == null || ViewBag.X == null || ViewBag.Y == null)
+        {
+            <font color="red"> @ViewBag.MyResult</font>
+        }
+        else
+        {
+         
+            <span>
+                @ViewBag.task of <font color="red"> @ViewBag.X </font> and <font color="blue"> @ViewBag.Y </font> is @ViewBag.MyResult
+            </span>
+
+            <a href="/download/report?PatientId=@ViewBag.MyResult&ReportType=All">Download your report!</a>
+
+        }
+
+    </div>
+</body>
+</html>

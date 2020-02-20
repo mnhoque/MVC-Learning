@@ -1,0 +1,116 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log in Pop Up Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // alert('page already loaded')
+
+            $('#btnLogin').click(function () {
+                // alert('hiiiii.');
+                document.getElementById('mySpan').innerHTML = "";
+                $('#loading').show();
+
+                document.getElementById("btnLogin").disabled = true;
+
+                $.post("/Home/ValidateLogin",
+                    {
+                        Userid: $('#tbUserid').val(),
+                        Password: $('#tbPassword').val()
+                    },
+
+                    //receiver
+                    function (data, status) {
+                        // alert('returned from server');
+                        $('#loading').hide();
+                        document.getElementById("btnLogin").disabled = false;
+
+                        if (data.Status == "Success") {
+                            document.getElementById('mySpan').innerHTML = "Login success for " + data.UserName + "(<font color='red'>" + data.FullName + "</font>)";
+
+                            setTimeout(
+                                function () {
+                                    //alert('Redirecting......');
+                                    window.location = "/Home/GroupOfButtons";
+                                },
+                                1000
+                            );
+                        }
+                        else {
+                            document.getElementById('mySpan').innerHTML = "Login failed!<br/>" + data.ErrorMessage;
+                        }
+
+                    }).fail(function (info) {
+                        // error handling
+                        $('#loading').hide();
+                        document.getElementById("btnLogin").disabled = false;
+
+                        alert("Sorry, we have a network failure");
+                    });
+
+
+
+            });//button click end
+
+
+
+
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+    <div class="w3-container">
+        <h2>Log in For User pop up model</h2>
+        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
+
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                <div class="w3-center">
+                    <br>
+                    <span id=" mySpan"></span>
+                    <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                </div>
+
+                <form class="w3-container" method="post" action="/Home/LogInValidation/">
+                    <div class="w3-section">
+                        <label><b>Username</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" id="tbUserid" type="text" placeholder="Enter Username" name="username" required>
+                        <label><b>Password</b></label>
+                        <input class="w3-input w3-border" id="tbPassword" type="password" placeholder="Enter Password" name="password" required>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" id="btnLogin" type="submit">Login</button>
+                        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+
+                    </div>
+                </form>
+                <span id="loading" style="display:none">
+                    <img src="~/imagesWeb/loading.gif" height="25" />
+                </span>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                    <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @TempData["error"] 
+
+</body>
+
+</html>

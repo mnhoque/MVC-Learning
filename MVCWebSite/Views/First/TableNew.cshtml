@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Operation</title>
+</head>
+<body>
+    <div>
+        @(ViewBag.From)
+        @(ViewBag.To)
+        @(ViewBag.Mul)
+        <br/>
+        @for (int j = ViewBag.From; j <= ViewBag.To; j++)
+        {
+            for (int i = 1; i <= ViewBag.Mul; i++)
+            {
+                int result = i * j;
+                <font> @j * @i = @result </font>
+                <br/>
+            }
+            <br/>
+        }
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<MVCWebSite.Models.Employee>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmployeeDetails</title>
+</head>
+<body>
+    <form method="post">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <h4>Size</h4>
+        <select name="size">
+            @for (int i = 3; i <= 6; i++)
+            {
+                // MVCWebSite.Controllers.HomeController.pageSize
+                if (i == MVCWebSite.Controllers.HomeController.pageSize)
+                {
+                    <option value="@i" selected>@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+
+            }
+
+
+        </select>
+        <input type="submit" name="btnSetPageSize" value="Click Here" />
+
+    </form>
+    <table class="table">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                EmpId
+            </th>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Office
+            </th>
+            <th></th>
+        </tr>
+        @{ 
+            string colour = "aliceblue";
+        }
+        
+        @foreach (var item in Model)
+        {
+            if (colour == "aliceblue")
+            {
+                colour = "aqua";
+            }
+            else
+            {
+                colour = "aliceblue";
+            }
+            if (item.EmpId == ViewBag.SelectedRowEmpId)
+            {
+                colour = "yellow";
+            }
+            <tr style="background-color:@colour">
+                <td>
+                    <a href="~/Home/EmployeeDetails?selectedEmpId=@item.EmpId&n=@ViewBag.n">Select</a>
+                </td>
+                <td>
+                    @item.EmpId
+                </td>
+                <td>
+                    @item.EmployeeName
+                </td>
+                <td>
+                    @item.AgeOfEmployee
+                </td>
+                <td>
+                    @item.OfficeOfEmployee
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmpId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EmpId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmpId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+
+        @{
+            if (ViewBag.n < ViewBag.totalPageNumber)
+            {
+                int count = ViewBag.n;
+                count = count + 1;
+
+                <a href="~/Home/EmployeeDetails?n=@count">Go to next page</a>
+
+            }
+        }
+
+
+        @{
+            if (ViewBag.n > 1)
+            {
+                int countPrev = ViewBag.n;
+                countPrev = countPrev - 1;
+                <a href="~/Home/EmployeeDetails?n=@countPrev">Go to previous page</a>
+            }
+        }
+
+    </p>
+</body>
+</html>

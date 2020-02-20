@@ -1,0 +1,187 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log in Pop Up Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+
+    <script>
+        
+        
+        $(document).ready(function () {
+            // alert('page already loaded')
+            document.getElementById('mySpan').innerHTML = "";
+            
+            $('#btnLogin').click(function () {
+                //alert('hiiiii.');
+                
+                
+               // $('#loading').show();
+                
+                // document.getElementById("btnLogin").disabled = true;
+               
+                $.post("/Home/ValidateLogin",
+                    {
+                        Userid: $('#tbUserid').val(),
+                        Password: $('#tbPassword').val()
+                    },
+
+                    //receiver
+                    function (data, status) {
+                        // alert('returned from server');
+                        $('#loading').hide();
+                        document.getElementById("btnLogin").disabled = true;
+                        var elem = document.getElementById("btnGotoLogin");
+                        if (data.Status == "Success") {
+
+                            window.location = "/Popup/Welcome";
+
+                            //change();
+                            document.getElementById('id01').style.display = 'none';
+                            //document.getElementById('btnMainPage').style.display = 'LogOut';
+                            document.getElementById('mySpan').innerHTML = "Login success for " + data.UserName + "(<font color='red'>" + data.FullName + "</font>)";
+
+                            localStorage.setItem("firstname", data.UserName);
+                            var elem = document.getElementById("btnGotoLogin");
+                            elem.value = "Logout";
+                               
+                            setTimeout(
+                                function () {
+                                    //alert('Redirecting......');
+                                    //window.location = "/Home/GroupOfButtons";
+                                },
+                                1000
+                            );
+                            //document.getElementById('btnGotoLogin').value = 'Logout';
+                            
+                            
+                           
+                        }
+                        
+                        else {
+                            document.getElementById('id01').style.display = 'none';
+                            document.getElementById('mySpan').innerHTML = "Login failed!<br/>" + data.ErrorMessage;
+                           
+                            //document.getElementById('mySpan').innerHTML = "";
+                            
+                            
+                        }
+
+                    }).fail(function (info) {
+                        // error handling
+                        $('#loading').hide();
+                        document.getElementById("btnLogin").disabled = false;
+
+                        alert("Sorry, we have a network failure");
+                    });
+
+
+
+            });//button click end
+        });
+        
+        function change() // no ';' here
+        {
+            var elem = document.getElementById("btnGotoLogin");
+            //document.getElementById('mySpan').innerHTML = "";
+           
+            if (elem.value == "Login") {
+                document.getElementById('id01').style.display = 'block';
+
+               // elem.value = "LogOut";
+                
+            }            
+            else {
+               // elem.value = "Login";
+                //document.getElementById('mySpan').innerHTML = "";
+                //document.getElementById('id01').style.display = 'none';
+                logOut();
+                
+            };
+        }
+
+        function logOut() {
+            //alert("LogOut");
+            var UseName=document.getElementById('tbUserid').value;
+            document.getElementById('mySpan').innerHTML = "";
+            $.post("/Home/LogOutRemote",
+                {
+
+                },
+
+                //receiver
+                function (data, status) {
+                    // alert('returned from server');
+                    $('#loading').hide();
+                    document.getElementById("btnLogin").disabled = true;
+                    debugger;
+                    if (data.Status == "Success") {
+                        
+                       // document.getElementById('id01').style.display = 'none';
+                        document.getElementById('tbUserid').value = "";
+                        document.getElementById('tbPassword').value = "";
+                        document.getElementById('mySpan').innerHTML = "Loged out for " + UseName;
+                        var elem = document.getElementById("btnGotoLogin");
+                        elem.value = "Login";
+                    }
+                    
+                    
+                }
+        )}
+
+    </script>
+</head>
+<body>
+
+    <div class="w3-container">
+        <h2>Pop Up Model</h2>
+        <input type="button" onclick="change();" class="w3-button w3-green w3-large" id="btnGotoLogin" value="Login" />
+
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                <div class="w3-center">
+                    <br>
+
+                    <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                </div>
+
+                <form class="w3-container" action="Welcome.htm">
+                    <div class="w3-section" >
+                        <label><b>Username</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" id="tbUserid" type="text" placeholder="Enter Username" name="username" required>
+                        <label><b>Password</b></label>
+                        <input class="w3-input w3-border" id="tbPassword" type="password" placeholder="Enter Password" name="password" required>
+                        <input type="button" class="w3-button w3-block w3-green w3-section w3-padding" id="btnLogin" value="Login" />
+                        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+
+                    </div>
+                </form>
+                <span id="loading" style="display:none">
+                    <img src="~/imagesWeb/loading.gif" height="25" />
+                </span>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                    <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+                </div>
+
+            </div>
+        </div>
+        <span id="mySpan"></span>
+    </div>
+    name:<input type="text" id="name" name="n">
+    <input type="submit" value="next">
+    <button type="button" id="print" onClick="testJS()"> Print </button>
+
+</body>
+
+</html>
+

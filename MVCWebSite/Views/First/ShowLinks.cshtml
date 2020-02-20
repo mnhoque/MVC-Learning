@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "ShowLinks";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div>
+
+        @for (int i = 1; i <= 10; i++)
+        {
+            //<font color="red">@i</font><br/>
+            <a href="~/First/ShowInfo/@i">Go to @i</a>
+            <br />
+            
+    //@Html.Raw($"<h{i}>Hello</h{i}>")
+
+
+
+        }
+
+
+    </div>
+</body>
+</html>
+
+
+
+

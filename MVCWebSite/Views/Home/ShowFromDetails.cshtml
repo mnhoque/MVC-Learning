@@ -1,0 +1,38 @@
+﻿
+@using System.Data;
+@{
+                
+
+                Layout = null;
+                DataTable dt = ViewBag.Emps;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowFromDetails</title>
+</head>
+<body>
+    <div>
+        @for (int i = 1; i <= ViewBag.PageCount; i++)
+        {
+            foreach (DataRow item in dt.Rows)
+            {
+                if(intitem==v)
+                <tr>
+                    <th>@(int)item["EmpId"]</th>
+                    <th>@item["EmployeeName"]</th>
+                    <th>@item["AgeOfEmployee"]</th>
+                    <th>@item["OfficeOfEmployee"]</th>
+
+                </tr>
+
+                
+            }
+        }
+        //<font color="red" size="4">@ViewBag.PageCount with @ViewBag.PageSize the total @ViewBag.RowNumber</font>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "ShowSamePage";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div>
+
+        @for (int i = 1; i <= 10; i++)
+        {
+            <a href="~/First/ShowSamePage/@i">Print Multiplication Table of @i</a>
+
+            <br />
+        }
+        @if (ViewBag.Id != null)
+        {
+            @: You selected @ViewBag.Id<br />
+            for (int i = 1; i <= 10; i++)
+            {
+                int result = i * ViewBag.Id;
+                <font color="red" size="4">@ViewBag.id*@i=@result</font>
+                <br />
+            }
+
+        }
+
+
+
+
+
+    </div>
+    
+</body>
+</html>
+

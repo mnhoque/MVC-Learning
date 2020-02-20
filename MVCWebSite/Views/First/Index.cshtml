@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+  
+    <div>
+            Hello searching for @(ViewBag.Id)
+            @for (int i = 1; i <= ViewBag.Id; i++)
+            {
+            <font color="red">Hello</font><br/>
+               //@Html.Raw($"<h{i}>Hello</h{i}>")
+           
+
+           
+        }
+
+    </div>
+</body>
+</html>

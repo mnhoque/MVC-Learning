@@ -1,0 +1,71 @@
+﻿@using System.Data;
+
+@{
+    Layout = null;
+    DataTable dt = ViewBag.Emps;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Bootstrap MVC Data Table</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Emp Id</th>
+                    <th>Emp Name</th>
+                    <th>Age</th>
+                    <th>Office</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (DataRow item in dt.Rows)
+                {
+                    <tr>
+                        <th>@item["EmpId"]</th>
+                        <th>@item["EmployeeName"]</th>
+                        <th>@item["AgeOfEmployee"]</th>
+                        <th>@item["OfficeOfEmployee"]</th>
+
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        Total employees count: @dt.Rows.Count
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

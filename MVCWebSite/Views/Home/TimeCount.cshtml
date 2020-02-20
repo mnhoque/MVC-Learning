@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TimeCount</title>
+    <script>
+        var t1, t2;
+        function buttonClicked() {
+            //window.location = "http://www.google.com";
+           t1 = setTimeout(waitToDraw, 1000);
+            
+           // alert("Hello");
+
+
+        }
+        var x = 1;
+        function waitToDraw() {
+            //alert("hiii");
+           
+            document.getElementById("mySpan").innerHTML = "<font color='red'>" + x + "</font>";
+            x++;
+            t2 = setTimeout(waitToBye, 1000);
+        }
+        function waitToBye() {
+            document.getElementById("mySpan").innerHTML = "<font color='blue'>" + x + "</font>";
+            x++;
+            t1 = setTimeout(waitToDraw, 1000);
+        }
+        function timerStop() {
+            clearTimeout(t1);
+            clearTimeout(t2);
+        }
+        
+
+        //drawRect(x, y, wid, hei); //Drawing rectangle on initial load
+
+       
+    </script>
+</head>
+<body>
+    <div>
+        <input id="btnDraw" type="submit" value="Click" onclick="buttonClicked()" />
+        <input id="btnStop" type="submit" value="Stop" onclick="timerStop()" />
+        
+        <span id="mySpan" /><br />
+        <br />
+        <br />
+       
+    </div>
+</body>
+</html>

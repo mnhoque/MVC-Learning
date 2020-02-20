@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Display Circle</title>
+    <script>
+        function drawCircle() {
+            var coordinate = document.getElementById("Coordinate").value;
+            var arr = coordinate.split(',');
+            var x, y;
+            x = parseInt(arr[0]);
+            y = parseInt(arr[1]);
+
+            var radius = parseInt(document.getElementById("Radius").value);
+            //alert(x + " " + y + " " + radius);
+            var c = document.getElementById("myCircle");
+            c.setAttribute("cx", x);
+            c.setAttribute("cy", y);
+            c.setAttribute("r",radius);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        
+            Enter Center Co-ordinate: <input type="text" id="Coordinate"><br>
+            <br />
+            Enter Radius: <input type="text" id="Radius"><br>
+            <br />
+            <input id="btnDraw" type="submit" value="Draw" onclick="drawCircle();" />
+           
+            <br />
+            <svg width="100" height="100">
+                <circle id="myCircle" cx="50" cy="50" r="0" stroke="green" stroke-width="4" fill="yellow"></circle>
+                Sorry, your browser does not support inline SVG.
+            </svg>
+        
+
+    </div>
+</body>
+</html>

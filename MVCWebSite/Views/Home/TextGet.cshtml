@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TextGet</title>
+</head>
+<body>
+    <div> 
+        <form method="post">
+            The Number: <input type="text" name="Number"><br>
+            <input name="btnSet" type="submit" value="Set" />
+            <input name="btnGet" type="submit" value="Get" />
+            <br/>
+            @ViewBag.Msg
+        </form>
+    </div>
+</body>
+</html>

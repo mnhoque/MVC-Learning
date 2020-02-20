@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TENNIS GAME</title>
+    <script>
+        var playerAPoint = 0;
+        var playerBPoint = 0;
+
+        function addPoint(player) {
+            if (player == "A")
+                playerAPoint++;
+            else
+                playerBPoint++;
+
+            score();
+        }
+
+        function init() {
+            score();
+        }
+
+        function score() {
+            var scoreBoard = document.getElementById('scoreBoard');
+
+           
+
+            //checking Love for Player A...
+            if (playerAPoint == 0)
+                scoreBoard.innerHTML = "Love ";
+            //checking Fifteen for Player A...
+            else if (playerAPoint == 1)
+                scoreBoard.innerHTML = "Fifteen ";
+            //checking Thirty for Player A...
+            else if (playerAPoint == 2)
+                scoreBoard.innerHTML = "Thirty ";
+            //checking Forty for Player A...
+            else if (playerAPoint == 3)
+                scoreBoard.innerHTML = "Fourty ";
+            else
+                scoreBoard.innerHTML = playerAPoint + " ";
+
+
+            //checking Love for Player B...
+            if (playerBPoint == 0)
+                scoreBoard.innerHTML += "Love ";
+            //checking Fifteen for Player B...
+            else if (playerBPoint == 1)
+                scoreBoard.innerHTML += "Fifteen ";
+            //checking Thirty for Player B...
+            else if (playerBPoint == 2)
+                scoreBoard.innerHTML += "Thirty ";
+            //checking Forty for Player B...
+            else if (playerBPoint == 3)
+                scoreBoard.innerHTML += "Fourty ";
+            else
+                scoreBoard.innerHTML += playerBPoint + " ";
+
+            //Check Deuce...
+            if (playerAPoint >= 3 && playerBPoint >= 3 && playerAPoint == playerBPoint) {
+                scoreBoard.innerHTML += "<br/>Deuce";
+            }
+
+
+            //calculating advantage for player A...
+            if (playerAPoint >= 3 && playerBPoint >= 3 && playerAPoint - playerBPoint == 1) {
+                scoreBoard.innerHTML += "<br/>Player A Advantage!";
+            }
+
+
+            //calculating advantage for player B...
+            if (playerAPoint >= 3 && playerBPoint >= 3 && playerBPoint - playerAPoint == 1) {
+                scoreBoard.innerHTML += "<br/>Player B Advantage!";
+            }
+
+            //checking win for player A...
+            if (playerAPoint >= 4 && (playerAPoint - playerBPoint) >= 2) {
+                scoreBoard.innerHTML += "<br/>Player A Wins!";
+                document.getElementById("buttonA").disabled = true;
+                document.getElementById("buttonB").disabled = true;
+                return;
+            }
+
+            //checking win for player B...
+            if (playerBPoint >= 4 && (playerBPoint - playerAPoint) >= 2) {
+                scoreBoard.innerHTML += "<br/>Player B Wins!";
+                document.getElementById("buttonA").disabled = true;
+                document.getElementById("buttonB").disabled = true;
+                return;
+            }
+
+        }
+
+    </script>
+</head>
+<!--1  A game is won by the first player to have won at least four points in total
+ and at least two points more than the opponent. 
+2.       The running score of each game is described in a manner peculiar to tennis: 
+scores from zero to three points are described as "Love", "Fifteen", "Thirty", and "Forty" 
+respectively.
+3.       If at least three points have been scored by each player, and the scores are equal,
+ the score is "Deuce".
+4.       If at least three points have been scored by each side and a player has one more
+ point than his opponent, the score of the game is "Advantage" for the player in the lead.-->
+
+<body onload="init()">
+    <input type="button" id="buttonA" value="Player A Point" onclick="addPoint('A');" /> &nbsp;&nbsp;&nbsp;
+    <input type="button" id="buttonB" value="Player B Point" onclick="addPoint('B');"  />
+    <br/>
+
+    <div id="scoreBoard">
+
+    </div>
+
+
+
+</body>
+</html>

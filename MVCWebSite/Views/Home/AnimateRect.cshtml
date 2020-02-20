@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AnimateRect</title>
+    <script>
+        var valueOfX;
+        
+        function moveRect() {
+           // var r = document.getElementById("rec");
+           // valueOfX = r.getAttribute("x");
+           // r.setAttribute("x", valueOfX);  
+           
+            setTimeout(moveRectNonStop, 1000);
+            
+        }
+        function moveRectNonStop() {
+            var r = document.getElementById("rec");
+           
+            valueOfX = r.getAttribute("x");
+            if (valueOfX < 800)
+            {
+                valueOfX = valueOfX + 10;                              
+            }
+            else
+            {
+                valueOfX = -150;                
+            }
+            r.setAttribute("x", valueOfX);//shift  
+
+            setTimeout(moveRectNonStop, 1000);
+        }
+        
+    </script>
+</head>
+<body>
+    <div>
+        <input id="btnMove" type="submit" value="Move" onclick="moveRect()" />
+        <br />
+        <svg width="800" height="300">
+            <rect id="rec" x="-150" y="20" width="150" height="150"
+                  style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" />
+        </svg>
+    </div>
+   
+</body>
+</html>
